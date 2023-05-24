@@ -1,32 +1,37 @@
-import { useEffect, useState } from 'react';
+// import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import leftIcon from '../assets/icons/left.svg';
-import axios from 'axios';
+// import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { CommunityData } from '../types/communityData';
 import PostItem from 'components/common/PostMainItem';
 import styled from 'styled-components';
+import { useHashtagPostQuery } from 'hooks/queries/useCommunity';
 
 const PostsByTagPage = () => {
   const navigate = useNavigate();
-  const { tag } = useParams<{ tag?: string }>();
-  const [posts, setPosts] = useState<CommunityData[]>([]);
+  const { tag } = useParams<{ tag: string }>();
+  // const [posts, setPosts] = useState<CommunityData[]>([]);
+  if (!tag) {
+    return <div></div>;
+  }
+  const { data } = useHashtagPostQuery(tag);
 
-  useEffect(() => {
-    const fetchPosts = async () => {
-      if (!tag) {
-        return; // tag이 undefined일 경우 요청을 보내지 않음
-      }
-      try {
-        const response = await axios.get(`http://3.39.153.141/search?hashtagName=${tag}`);
-        setPosts(response?.data?.result?.content);
-        console.log('Posts: ', response.data); // posts 확인
-      } catch (error) {
-        console.error('Failed to fetch posts:', error);
-      }
-    };
-    fetchPosts();
-  }, [tag]);
+  // useEffect(() => {
+  //   const fetchPosts = async () => {
+  //     if (!tag) {
+  //       return; // tag이 undefined일 경우 요청을 보내지 않음
+  //     }
+  //     try {
+  //       const response = await axios.get(`http://3.39.153.141/search?hashtagName=${tag}`);
+  //       setPosts(response?.data?.result?.content);
+  //       console.log('Posts: ', response.data); // posts 확인
+  //     } catch (error) {
+  //       console.error('Failed to fetch posts:', error);
+  //     }
+  //   };
+  //   fetchPosts();
+  // }, [tag]);
 
   return (
     <div>
@@ -42,7 +47,7 @@ const PostsByTagPage = () => {
           />
           <h1>{tag} 해시태그가 포함된 게시물</h1>
         </PostByPageHeader>
-        {posts.map((data) => (
+        {data?.result?.content.map((data: CommunityData) => (
           <PostItem
             recordedId={data?.recordedId}
             title={data?.title}

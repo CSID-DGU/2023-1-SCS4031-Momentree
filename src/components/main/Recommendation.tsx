@@ -88,20 +88,15 @@ const RecommendationSlider = styled.section`
 // const Recommendation = () => {
 //   const [cookies] = useCookies(['user']);
 //   const navigate = useNavigate();
-//   const [posts, setPosts] = useState<CommunityData[]>([]);
+//   // const [posts, setPosts] = useState<CommunityData[]>([]);
 
 //   const { data } = useRecommendQuery(cookies?.user?.userToken);
-//   useEffect(() => {
-//     if (data?.result?.content) {
-//       setPosts(data.result.content);
-//     }
-//   }, [data]);
 
 //   return (
 //     <RecommendationContainer>
 //       <RecommendationContainerTitle>당신을 위한 추천 코스</RecommendationContainerTitle>
 //       <RecommendationSlider>
-//         {posts.map((data, index) => {
+//         {data?.result?.content.map((data: CommunityData, index: number) => {
 //           return (
 //             <div
 //               onClick={() => {
