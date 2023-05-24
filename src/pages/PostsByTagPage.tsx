@@ -10,12 +10,14 @@ import { useHashtagPostQuery } from 'hooks/queries/useCommunity';
 
 const PostsByTagPage = () => {
   const navigate = useNavigate();
-  const { tag } = useParams<{ tag: string }>();
-  // const [posts, setPosts] = useState<CommunityData[]>([]);
-  if (!tag) {
-    return <div></div>;
-  }
+  const { tag = '' } = useParams(); // tag가 undefined일 때 빈 문자열을 기본값으로 할당
   const { data } = useHashtagPostQuery(tag);
+
+  // const [posts, setPosts] = useState<CommunityData[]>([]);
+  // if (!tag) {
+  //   return <div></div>;
+  // }
+  // const { data } = useHashtagPostQuery(tag?.toString());
 
   // useEffect(() => {
   //   const fetchPosts = async () => {

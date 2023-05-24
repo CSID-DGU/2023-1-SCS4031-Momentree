@@ -8,6 +8,6 @@ export const useCommunityQuery = (page: number, size: number, token?: string) =>
 };
 
 export const useHashtagPostQuery = (tagName: string) => {
-  const data = useQuery(['getHashtagPost'], () => getHashtagPost(tagName));
+  const data = useQuery(['getHashtagPost', tagName], () => getHashtagPost(tagName), { enabled: !!tagName });
   return data;
 };
