@@ -1,10 +1,6 @@
 import styled from 'styled-components';
 import RecommendationItem from './RecommendationItem';
 import { useNavigate } from 'react-router-dom';
-// import { useRecommendQuery } from '../../hooks/queries/useRecommend';
-// import { CommunityData } from 'types/communityData';
-// import { useCookies } from 'react-cookie';
-// import { useEffect, useState } from 'react';
 
 const Recommendation = () => {
   const navigate = useNavigate();
@@ -84,40 +80,5 @@ const RecommendationSlider = styled.section`
   overflow: auto;
   white-space: nowrap;
 `;
-
-// const Recommendation = () => {
-//   const [cookies] = useCookies(['user']);
-//   const navigate = useNavigate();
-//   // const [posts, setPosts] = useState<CommunityData[]>([]);
-
-//   const { data } = useRecommendQuery(cookies?.user?.userToken);
-
-//   return (
-//     <RecommendationContainer>
-//       <RecommendationContainerTitle>당신을 위한 추천 코스</RecommendationContainerTitle>
-//       <RecommendationSlider>
-//         {data?.result?.content.map((data: CommunityData, index: number) => {
-//           return (
-//             <div
-//               onClick={() => {
-//                 navigate(`/post/${data.recordedId}`);
-//                 window.location.reload();
-//               }}>
-//               <RecommendationItem
-//                 recoredId={data?.recordedId}
-//                 title={data.title}
-//                 bookMarkStatus={data.bookMarkStatus}
-//                 likeCnt={data.likeCnt}
-//                 bookmarkCnt={data.bookMarkCnt}
-//                 place={data.recordedPlaces}
-//                 key={index}></RecommendationItem>
-//               );
-//             </div>
-//           );
-//         })}
-//       </RecommendationSlider>
-//     </RecommendationContainer>
-//   );
-// };
 
 export default Recommendation;

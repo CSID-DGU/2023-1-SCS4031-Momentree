@@ -4,8 +4,6 @@ import clickbookmarkIcon from '../../assets/icons/clickbookmark.svg';
 import heartIcon from '../../assets/icons/heart.svg';
 import bookmarkIcon from '../../assets/icons/bookmark.svg';
 import { RecommendationItemProps } from '../../types/recommendationItem';
-// import MapThumbnail from 'components/common/MapThumbnail';
-// import { useCookies } from 'react-cookie';
 
 const RecommendationItem = ({ title, bookMarkStatus, likeCnt, bookmarkCnt, place }: RecommendationItemProps) => {
   return (
@@ -100,40 +98,5 @@ const RecommendationItemInfo = styled.article`
     margin-right: 0.4rem;
   }
 `;
-
-// const RecommendationItem = ({
-//   recoredId,
-//   title,
-//   bookMarkStatus,
-//   likeCnt,
-//   bookmarkCnt,
-//   place,
-// }: RecommendationItemProps) => {
-//   const [cookies] = useCookies(['user']);
-//   const body = {};
-
-//   return (
-//     <RecommendationItemContainer>
-//       <Map>
-//         <MapThumbnail recordedId={recordedId} places={place} />
-//       </Map>
-//       {bookMarkStatus ? (
-//         <BookmarkIcon src={clickbookmarkIcon} alt="북마크 한 아이콘" />
-//       ) : (
-//         <BookmarkIcon src={unclickbookmarkIcon} alt="북마크 하지 않은 아이콘" />
-//       )}
-//       <h1>{title}</h1>
-//       <PlaceContainer>
-//         {place?.map((item, index) => {
-//           return <article key={index}>{item}</article>;
-//         })}
-//       </PlaceContainer>
-//       <RecommendationItemInfo>
-//         <Icon src={heartIcon} alt="좋아요 아이콘" /> <p>{likeCnt}</p>
-//         <Icon src={bookmarkIcon} alt="북마크 아이콘" /> <p>{bookmarkCnt}</p>
-//       </RecommendationItemInfo>
-//     </RecommendationItemContainer>
-//   );
-// };
 
 export default RecommendationItem;
