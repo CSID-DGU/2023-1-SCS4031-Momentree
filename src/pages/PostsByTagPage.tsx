@@ -13,28 +13,6 @@ const PostsByTagPage = () => {
   const { tag = '' } = useParams(); // tag가 undefined일 때 빈 문자열을 기본값으로 할당
   const { data } = useHashtagPostQuery(tag);
 
-  // const [posts, setPosts] = useState<CommunityData[]>([]);
-  // if (!tag) {
-  //   return <div></div>;
-  // }
-  // const { data } = useHashtagPostQuery(tag?.toString());
-
-  // useEffect(() => {
-  //   const fetchPosts = async () => {
-  //     if (!tag) {
-  //       return; // tag이 undefined일 경우 요청을 보내지 않음
-  //     }
-  //     try {
-  //       const response = await axios.get(`http://3.39.153.141/search?hashtagName=${tag}`);
-  //       setPosts(response?.data?.result?.content);
-  //       console.log('Posts: ', response.data); // posts 확인
-  //     } catch (error) {
-  //       console.error('Failed to fetch posts:', error);
-  //     }
-  //   };
-  //   fetchPosts();
-  // }, [tag]);
-
   return (
     <div>
       <PostByPageContainer>
