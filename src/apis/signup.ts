@@ -1,14 +1,14 @@
 // signup.ts
-import { POST } from './api';
+import { POST } from 'apis/api';
 
-interface IUserRegisterInput {
+interface IBody {
   userName: string;
   email: string;
   password: string;
   nickname: string;
 }
 
-export const registerUser = async (registerInput: IUserRegisterInput) => {
-  const { data } = await POST('/join', registerInput);
+export const postSignup = async (body: IBody) => {
+  const { data } = await POST('/join', body);
   return data;
 };

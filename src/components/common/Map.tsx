@@ -15,7 +15,7 @@ const Map = ({ places }: MapProps) => {
   const { kakao } = window;
   const [isOpenPlace, setIsOpenPlace] = useState<boolean>(false);
   const [clickedMarkerIdx, setClickedMarkerIdx] = useState<number>(0); // 지도에서 클릭한 마커의 인덱스
-  const [markers, setMarkers] = useState<any>(null);
+  const [markers, setMarkers] = useState<any>([]);
   const [map, setMap] = useState<any>(null);
 
   // 지도를 불러옵니다

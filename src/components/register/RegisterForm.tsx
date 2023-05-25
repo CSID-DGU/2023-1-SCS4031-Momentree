@@ -1,15 +1,12 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import logoIcon from '../../assets/logo.png';
 import RegisterButton from './RegisterButton';
-import axios from 'axios';
+import { useSignupMtutation } from 'hooks/queries/useSignup';
 
 const Register = () => {
-  const navigate = useNavigate();
-
-  // 회원가입 창의 상태와 활성화 여부를 관리하는 상태 변수들
   const [isActive, setIsActive] = useState<boolean>(false);
   const [registerInput, setRegisterInput] = useState({
     userName: '',
@@ -17,6 +14,7 @@ const Register = () => {
     password: '',
     nickname: '',
   });
+  const handleRegister = useSignupMtutation(registerInput);
 
   useEffect(() => {
     const { userName, email, password, nickname } = registerInput;
@@ -27,43 +25,12 @@ const Register = () => {
     }
   }, [registerInput]);
 
-  // apis로 회원가입 API요청
-  // const handleRegister = async () => {
-  //   //console.log(registerInput);
-  //   try {
-  //     const response = await registerUser(registerInput);
-  //     if (response.status === 200) {
-  //       navigate('/');
-  //       console.log('회원가입 성공');
-  //     } else {
-  //       console.log('회원가입 실패');
-  //     }
-  //   } catch (error) {
-  //     console.error('Error:', error);
-  //   }
-  // };
-
-  const handleRegister = async () => {
-    try {
-      const response = await axios.post('http://3.39.153.141/join', registerInput);
-      if (response.status === 200) {
-        navigate('/');
-        console.log('회원가입 성공');
-      } else {
-        console.log('회원가입 실패');
-      }
-    } catch (error) {
-      console.error('Error:', error);
-    }
-  };
-
   return (
     <RegisterLayout>
       <LogoRow>
         <LogoImage src={logoIcon} alt="Logo" />
       </LogoRow>
-      <RegisterForm onSubmit={handleRegister}>
-        {/* 아이디 입력 필드 */}
+      <RegisterForm>
         <Input
           type="text"
           name="username"
@@ -92,7 +59,6 @@ const Register = () => {
             })
           }
         />
-        {/* 비밀번호 입력 필드 */}
         <Input
           type="password"
           name="password"
@@ -107,7 +73,6 @@ const Register = () => {
             })
           }
         />
-        {/* 닉네임 입력 필드 */}
         <Input
           type="text"
           name="nickname"
@@ -123,7 +88,7 @@ const Register = () => {
           }
         />
       </RegisterForm>
-      <RegisterButton label="회원가입" isActive={isActive} handleClickSave={handleRegister} />
+      <RegisterButton label="회원가입" isActive={isActive} handleClickSave={() => handleRegister.mutate()} />
       <LoginLink>
         계정이 있으신가요? <StyledLink to="/login">로그인하기</StyledLink>
       </LoginLink>
@@ -148,9 +113,8 @@ const LogoImage = styled.img`
 `;
 
 const RegisterForm = styled.form`
-  // display: flex;
-  // flex-direction: column;
-  // align-items: center;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const Input = styled.input`
